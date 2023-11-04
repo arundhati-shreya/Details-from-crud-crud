@@ -97,10 +97,11 @@
         const btn = document.querySelector(".btn-add");
         const neww = document.querySelector(".newC");
 
+
         document.addEventListener("DOMContentLoaded", loadUserDetails);
 
         function loadUserDetails() {
-            axios.get('https://crudcrud.com/api/b45c5406cace47ee973b439ece370e11/bookingData')
+            axios.get('https://crudcrud.com/api/4e08d1c8f3054873b7e6dbbe042b7560/bookingData')
                 .then((response) => {
                     const userDetails = response.data;
                     const newC = document.querySelector(".newC");
@@ -120,6 +121,20 @@
                         dltBtn.classList.add("btnn");
                         dltBtn.innerHTML = "Delete";
                         lis.appendChild(dltBtn);
+
+
+
+
+                        lis.id = user._id;
+
+                        dltBtn.onclick = function () {
+                            deleteItem(user._id); // Call deleteItem function with the ID associated with the user
+                        };
+
+                        lis.appendChild(dltBtn);
+
+
+
 
                         const editBtn = document.createElement("button");
                         editBtn.classList.add("btnnn");
@@ -154,6 +169,19 @@
                 dltBtn.innerHTML = "Delete";
                 lis.appendChild(dltBtn);
 
+
+
+                // lis.id = user._id;
+
+                //     dltBtn.onclick = function () {
+                //         deleteItem(user._id); // Call deleteItem function with the ID associated with the user
+                //     };
+
+                //     lis.appendChild(dltBtn);
+
+
+
+
                 const editBtn = document.createElement("button");
                 editBtn.classList.add("btnnn");
                 editBtn.innerHTML = "Edit";
@@ -164,7 +192,7 @@
                     email: input1.value,
                 };
 
-                axios.post('https://crudcrud.com/api/b45c5406cace47ee973b439ece370e11/bookingData', userDetails)
+                axios.post('https://crudcrud.com/api/4e08d1c8f3054873b7e6dbbe042b7560/bookingData', userDetails)
                     .then((response) => {
                         console.log(response.data);
                     })
@@ -176,6 +204,19 @@
             input1.value = '';
         }
 
+
+        // function deleteItem(id) {
+        //     axios.delete(`https://crudcrud.com/api/b45c5406cace47ee973b439ece370e11/bookingData/${id}`)
+        //         .then((response) => {
+        //             const itemToDelete = document.getElementById(id);
+        //             if (itemToDelete) {
+        //                 itemToDelete.remove();
+        //             }
+        //         })
+        //         .catch((error) => {
+        //             console.error('Error deleting item:', error);
+        //         });
+        // }
         neww.addEventListener("click", function (e) {
             if (e.target.className === "btnn") {
                 e.target.parentElement.remove();
@@ -186,7 +227,22 @@
                 e.target.parentElement.remove();
             }
         });
+
+
+        function deleteItem(id) {
+            axios.delete(`https://crudcrud.com/api/4e08d1c8f3054873b7e6dbbe042b7560/bookingData/${id}`)
+                .then((response) => {
+                    const itemToDelete = document.getElementById(id);
+                    if (itemToDelete) {
+                        itemToDelete.remove();
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error deleting item:', error);
+                });
+        }
     </script>
+
 </body>
 
 </html>
